@@ -7,7 +7,8 @@ services:
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false       # カーネルTUNを使う
+      - TS_USERSPACE=false       # カーネルのネットワークスタックを使う
+      - TS_HOSTNAME=docker-ts-node # ホスト名設定
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -15,11 +16,11 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - tailscale-state:/var/lib/tailscale
-    restart: unless-stopped
+    restart: unless-stopped # 手動停止の場合を除き，停止時には自動再起動を試みる
 
-  sshd-ubuntu:
-    build: ./sshd
-    container_name: sshd-node
+  machine-ubuntu:
+    build: ./machine
+    container_name: machine-node
     network_mode: service:tailscale
     depends_on:
       - tailscale
