@@ -1,0 +1,12 @@
+services:
+  sshd:
+    build: .
+    image: sshd_example
+    container_name: sshd_container
+    ports:
+      - "2222:22"
+    # -D はフォアグラウンド実行、 -d はデバッグモードのオプション
+    # アクセスに成功するまではつけておくとよい
+    # デバッグモードでは一度アクセスを受け付けると
+    # それ以降のアクセスを受け付けなくなるので、常用するときは外す
+    command: ["/usr/sbin/sshd", "-D", "-d"]
