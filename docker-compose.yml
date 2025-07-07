@@ -24,6 +24,15 @@ services:
     network_mode: service:tailscale
     depends_on:
       - tailscale
+    deploy:
+      resources:
+        # GPUデバイスの予約設定
+        reservations:
+          devices:
+             # NVIDIAドライバを使用するデバイスの設定
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [all]
 
 volumes:
   tailscale-state:
