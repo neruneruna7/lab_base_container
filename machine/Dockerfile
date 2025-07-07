@@ -1,5 +1,5 @@
-FROM nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
-ENV DEBIAN_FRONTEND=noninteractive
+FROM nvidia/cuda:12.9.1-base-ubuntu20.04
+# ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     openssh-server python3 python3-pip curl ca-certificates git build-essential sudo \
