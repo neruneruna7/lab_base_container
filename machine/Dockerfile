@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -6,8 +6,6 @@ RUN apt-get update && apt-get install -y \
   && mkdir /var/run/sshd \
   && echo 'root:password' | chpasswd \
   && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-RUN curl -Ls https://astral.sh/uv/install.sh | bash
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
