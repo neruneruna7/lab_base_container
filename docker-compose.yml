@@ -1,8 +1,6 @@
 version: "3.9"
 
 services:
-  model:
-    gpus: all
   tailscale:
     image: tailscale/tailscale:latest
     container_name: ts-node
@@ -26,6 +24,7 @@ services:
     network_mode: service:tailscale
     depends_on:
       - tailscale
+    gpus: all
     # deploy:
     #   resources:
     #     # GPUデバイスの予約設定
