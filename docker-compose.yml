@@ -1,6 +1,8 @@
 version: "3.9"
 
 services:
+  model:
+    gpus: all
   tailscale:
     image: tailscale/tailscale:latest
     container_name: ts-node
@@ -24,15 +26,14 @@ services:
     network_mode: service:tailscale
     depends_on:
       - tailscale
-    deploy:
-      resources:
-        # GPUデバイスの予約設定
-        reservations:
-          devices:
-             # NVIDIAドライバを使用するデバイスの設定
-            - driver: nvidia
-              device_ids: ["0"]
-              capabilities: [all]
-
+    # deploy:
+    #   resources:
+    #     # GPUデバイスの予約設定
+    #     reservations:
+    #       devices:
+    #          # NVIDIAドライバを使用するデバイスの設定
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
 volumes:
   tailscale-state:
