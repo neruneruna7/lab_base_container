@@ -24,7 +24,6 @@ services:
     network_mode: service:tailscale
     depends_on:
       - tailscale
-    command: nvidia-smi
     gpus: all
     # deploy:
     #   resources:
