@@ -10,8 +10,7 @@ services:
       - TS_USERSPACE=false       # カーネルのネットワークスタックを使う
       - TS_HOSTNAME=docker-ts-node # ホスト名設定
     cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
+      - net_admin
     devices:
       - /dev/net/tun:/dev/net/tun
     volumes:
